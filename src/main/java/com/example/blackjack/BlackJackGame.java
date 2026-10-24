@@ -8,6 +8,8 @@ public class BlackJackGame {
     private Mano manoComputador;
     private int saldo;
     private int apuesta;
+    private boolean rondaActiva;
+    private boolean turnoComputador;
 
     public BlackJackGame() {
         mazo = new Mazo();
@@ -15,6 +17,8 @@ public class BlackJackGame {
         manoComputador = new Mano();
         saldo = 1000;
         apuesta = 0;
+        rondaActiva = false;
+        turnoComputador = false;
     }
 
     public void iniciarRonda() {
@@ -26,12 +30,12 @@ public class BlackJackGame {
 
         manoJugador.agregarCarta(mazo.repartirCarta());
         manoJugador.agregarCarta(mazo.repartirCarta());
+        rondaActiva = true;
+        turnoComputador = false;
     }
-
     public int getPuntosJugador() {
         return manoJugador.calcularPuntos();
     }
-
     public int getPuntosComputador() {
         return manoComputador.calcularPuntos();
     }
@@ -48,5 +52,45 @@ public class BlackJackGame {
         saldo -= apuesta;
         return true;
 
+    }
+
+    public void pedirCarta() {
+        if (!rondaActiva || turnoComputador) {
+            return;
+        }
+
+        manoJugador.agregarCarta(mazo.repartirCarta()); /*agrega cartas a la mano*/
+
+        /*si se pasa del puntaje 21 pierde la ronda*/
+        if (getPuntosJugador() > 21) {
+            rondaResultado();
+            return;
+        }
+
+        if (getPuntosJugador()==21) {
+            computadoraJugando();
+        }
+
+    }
+
+    public void plantarse() {
+        if (!rondaActiva || turnoComputador) {
+            return;
+        }
+        computadoraJugando();
+    }
+
+    private void computadoraJugando() {
+        turnoComputador = true;
+        manoComputador.agregarCarta(mazo.repartirCarta());
+        manoComputador.agregarCarta(mazo.repartirCarta());
+
+        while (getPuntosComputador() <  17 ) {
+            manoComputador.agregarCarta(mazo.repartirCarta());
+        }
+    }
+    private void rondaResultado() {
+        if ( getPuntosJugador() > 21 ) {
+            rondaActiva = false;
     }
 }
