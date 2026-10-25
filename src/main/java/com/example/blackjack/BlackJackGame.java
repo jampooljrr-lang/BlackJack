@@ -10,6 +10,7 @@ public class BlackJackGame {
     private int apuesta;
     private boolean rondaActiva;
     private boolean turnoComputador;
+    private String resultado;
 
     public BlackJackGame() {
         mazo = new Mazo();
@@ -19,6 +20,10 @@ public class BlackJackGame {
         apuesta = 0;
         rondaActiva = false;
         turnoComputador = false;
+
+        if (tieneBlackJackInicial(manoJugador)) {
+            computadoraJugando();
+        }
     }
 
     public void iniciarRonda() {
@@ -33,19 +38,44 @@ public class BlackJackGame {
         rondaActiva = true;
         turnoComputador = false;
     }
+
     public int getPuntosJugador() {
         return manoJugador.calcularPuntos();
     }
     public int getPuntosComputador() {
         return manoComputador.calcularPuntos();
     }
-
     public int getSaldo() {
         return saldo;
     }
+    public String getResultado() {
+        return resultado;
+    }
+
+    private boolean tieneBlackJackInicial(Mano mano) {
+        if (mano.getCantidadCartas() != 2) {
+            return false;
+        }
+
+        String valor1 = mano.getCarta(0).getValor();
+        String valor2 = mano.getCarta(1).getValor();
+
+        boolean tieneAs = valor1.equals("A") || valor2.equals("A");
+
+        boolean tieneDiez = valor1.equals("10") ||
+                valor1.equals("J") ||
+                valor1.equals("Q") ||
+                valor1.equals("K") ||
+                valor2.equals("10") ||
+                valor2.equals("J") ||
+                valor2.equals("Q") ||
+                valor2.equals("K");
+
+        return tieneAs && tieneDiez;
+    }
 
     public boolean realizarApuesta(int cantidad) {
-        if (cantidad <10 || cantidad%10 != 0 || cantidad > saldo) {
+        if (cantidad < 10 || cantidad % 10 != 0 || cantidad > saldo) {
             return false;
         }
         apuesta = cantidad;
@@ -67,7 +97,7 @@ public class BlackJackGame {
             return;
         }
 
-        if (getPuntosJugador()==21) {
+        if (getPuntosJugador() == 21) {
             computadoraJugando();
         }
 
@@ -80,17 +110,69 @@ public class BlackJackGame {
         computadoraJugando();
     }
 
+
     private void computadoraJugando() {
         turnoComputador = true;
+
         manoComputador.agregarCarta(mazo.repartirCarta());
         manoComputador.agregarCarta(mazo.repartirCarta());
 
-        while (getPuntosComputador() <  17 ) {
+        // Si el computador tiene Blackjack inicial,
+        // se termina la ronda para comparar los Blackjacks.
+        if (tieneBlackJackInicial(manoComputador)) {
+            rondaResultado();
+            return;
+        }
+
+        // Si el jugador tiene Blackjack inicial,
+        // gana porque el computador no obtuvo Blackjack.
+        if (tieneBlackJackInicial(manoJugador)) {
+            rondaResultado();
+            return;
+        }
+
+        while (getPuntosComputador() < 17) {
             manoComputador.agregarCarta(mazo.repartirCarta());
         }
+
+        rondaResultado();
     }
+
+
+
     private void rondaResultado() {
-        if ( getPuntosJugador() > 21 ) {
-            rondaActiva = false;
+        boolean blackjackJugador = tieneBlackJackInicial(manoJugador);
+        boolean blackjackComputador = tieneBlackJackInicial(manoComputador);
+
+        if (blackjackJugador && blackjackComputador) {
+            resultado = "Empate: ambos tienen Blackjack";
+            saldo += apuesta;
+
+        } else if (blackjackJugador) {
+            resultado = "¡Blackjack! Ganaste";
+            saldo += apuesta * 5 / 2;
+
+        } else if (getPuntosJugador() > 21) {
+            resultado = "Perdiste: superaste los 21 puntos";
+
+        } else if (getPuntosComputador() > 21) {
+            resultado = "Ganaste: el computador superó los 21 puntos";
+            saldo += apuesta * 2;
+
+        } else if (getPuntosJugador() > getPuntosComputador()) {
+            resultado = "Ganaste";
+            saldo += apuesta * 2;
+
+        } else if (getPuntosComputador() > getPuntosJugador()) {
+            resultado = "Ganó el computador";
+
+        } else {
+            resultado = "Empate";
+            saldo += apuesta;
+        }
+
+        rondaActiva = false;
     }
+
+
 }

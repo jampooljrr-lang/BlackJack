@@ -39,4 +39,11 @@ public class Mano {
 
         return puntos;
     }
+    public int getCantidadCartas() {
+        return cartas.size();
+    }
+
+    public Carta getCarta(int posicion) {
+        return cartas.get(posicion);
+    }
 }
