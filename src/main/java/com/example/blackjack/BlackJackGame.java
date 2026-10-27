@@ -20,24 +20,43 @@ public class BlackJackGame {
         apuesta = 0;
         rondaActiva = false;
         turnoComputador = false;
+    }
+
+    // Constructor auxiliar para probar resultados específicos.
+    BlackJackGame(Mano jugador, Mano computador, int apuestaPrueba) {
+        mazo = new Mazo();
+        manoJugador = jugador;
+        manoComputador = computador;
+        saldo = 1000 - apuestaPrueba;
+        apuesta = apuestaPrueba;
+        rondaActiva = true;
+        turnoComputador = true;
+        resultado = null;
+    }
+
+
+    public void iniciarRonda() {
+        if (rondaActiva || apuesta == 0) {
+            return;
+        }
+
+        mazo = new Mazo();
+        mazo.barajar();
+        manoJugador = new Mano();
+        manoComputador = new Mano();
+
+        manoJugador.agregarCarta(mazo.repartirCarta());
+        manoJugador.agregarCarta(mazo.repartirCarta());
+
+        rondaActiva = true;
+        turnoComputador = false;
+        resultado = null;
 
         if (tieneBlackJackInicial(manoJugador)) {
             computadoraJugando();
         }
     }
 
-    public void iniciarRonda() {
-        mazo = new Mazo();
-        mazo.barajar();
-
-        manoJugador = new Mano();
-        manoComputador = new Mano();
-
-        manoJugador.agregarCarta(mazo.repartirCarta());
-        manoJugador.agregarCarta(mazo.repartirCarta());
-        rondaActiva = true;
-        turnoComputador = false;
-    }
 
     public int getPuntosJugador() {
         return manoJugador.calcularPuntos();
@@ -74,34 +93,43 @@ public class BlackJackGame {
         return tieneAs && tieneDiez;
     }
 
+    boolean tieneVeinteYMedio(Mano mano) {
+        if (mano.getCantidadCartas() != 2) {
+            return false;
+        }
+
+        String valor1 = mano.getCarta(0).getValor();
+        String valor2 = mano.getCarta(1).getValor();
+
+        boolean tieneFigura = valor1.equals("J")
+                || valor1.equals("Q")
+                || valor1.equals("K")
+                || valor2.equals("J")
+                || valor2.equals("Q")
+                || valor2.equals("K");
+
+        boolean tieneCuatro = valor1.equals("4")
+                || valor2.equals("4");
+
+        return tieneFigura && tieneCuatro;
+    }
+
+
+
     public boolean realizarApuesta(int cantidad) {
+        if (rondaActiva || apuesta != 0) {
+            return false;
+        }
+
         if (cantidad < 10 || cantidad % 10 != 0 || cantidad > saldo) {
             return false;
         }
+
         apuesta = cantidad;
         saldo -= apuesta;
         return true;
-
     }
 
-    public void pedirCarta() {
-        if (!rondaActiva || turnoComputador) {
-            return;
-        }
-
-        manoJugador.agregarCarta(mazo.repartirCarta()); /*agrega cartas a la mano*/
-
-        /*si se pasa del puntaje 21 pierde la ronda*/
-        if (getPuntosJugador() > 21) {
-            rondaResultado();
-            return;
-        }
-
-        if (getPuntosJugador() == 21) {
-            computadoraJugando();
-        }
-
-    }
 
     public void plantarse() {
         if (!rondaActiva || turnoComputador) {
@@ -110,8 +138,16 @@ public class BlackJackGame {
         computadoraJugando();
     }
 
+    public boolean isRondaActiva() {
+        return rondaActiva;
+    }
+
 
     private void computadoraJugando() {
+        if (!rondaActiva || turnoComputador) {
+            return;
+        }
+
         turnoComputador = true;
 
         manoComputador.agregarCarta(mazo.repartirCarta());
@@ -139,8 +175,36 @@ public class BlackJackGame {
     }
 
 
+    public void pedirCarta() {
+        if (!rondaActiva || turnoComputador) {
+            return;
+        }
 
-    private void rondaResultado() {
+        Carta carta = mazo.repartirCarta();
+
+        if (carta == null) {
+            return;
+        }
+
+        manoJugador.agregarCarta(carta);
+
+        if (getPuntosJugador() > 21) {
+            rondaResultado();
+        } else if (getPuntosJugador() == 21) {
+            computadoraJugando();
+        }
+    }
+
+
+
+
+    //va un private antes de void se cambio por pruebaa NO OLVIDAR
+    void rondaResultado() {
+        // Evita pagar dos veces por la misma ronda.
+        if (!rondaActiva) {
+            return;
+        }
+
         boolean blackjackJugador = tieneBlackJackInicial(manoJugador);
         boolean blackjackComputador = tieneBlackJackInicial(manoComputador);
 
@@ -154,6 +218,9 @@ public class BlackJackGame {
 
         } else if (getPuntosJugador() > 21) {
             resultado = "Perdiste: superaste los 21 puntos";
+
+        } else if (blackjackComputador) {
+            resultado = "Perdiste: el computador tiene Blackjack";
 
         } else if (getPuntosComputador() > 21) {
             resultado = "Ganaste: el computador superó los 21 puntos";
@@ -172,7 +239,9 @@ public class BlackJackGame {
         }
 
         rondaActiva = false;
+        apuesta = 0;
     }
+
 
 
 }
