@@ -13,6 +13,13 @@ public class Mazo {
         crearMazo();
     }
 
+    // Constructor auxiliar para pruebas con cartas conocidas.
+    Mazo(Carta[] cartasPrueba) {
+        cartas = cartasPrueba.clone();
+        siguienteCarta = 0;
+    }
+
+
     public void crearMazo() {
         String[] palos = {
                 "Corazones", "Diamantes", "Treboles", "Picas"

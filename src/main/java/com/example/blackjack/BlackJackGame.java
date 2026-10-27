@@ -22,6 +22,19 @@ public class BlackJackGame {
         turnoComputador = false;
     }
 
+    // Constructor auxiliar para probar turnos con cartas conocidas.
+    BlackJackGame(Mazo mazoPrueba, Mano jugador, Mano computador, int apuestaPrueba) {
+        mazo = mazoPrueba;
+        manoJugador = jugador;
+        manoComputador = computador;
+        saldo = 1000 - apuestaPrueba;
+        apuesta = apuestaPrueba;
+        rondaActiva = true;
+        turnoComputador = false;
+        resultado = null;
+    }
+
+
     // Constructor auxiliar para probar resultados específicos.
     BlackJackGame(Mano jugador, Mano computador, int apuestaPrueba) {
         mazo = new Mazo();
@@ -56,6 +69,17 @@ public class BlackJackGame {
             computadoraJugando();
         }
     }
+
+
+    // Métodos auxiliares para comprobar cuántas cartas tiene cada mano.
+    int getCantidadCartasJugador() {
+        return manoJugador.getCantidadCartas();
+    }
+
+    int getCantidadCartasComputador() {
+        return manoComputador.getCantidadCartas();
+    }
+
 
 
     public int getPuntosJugador() {
