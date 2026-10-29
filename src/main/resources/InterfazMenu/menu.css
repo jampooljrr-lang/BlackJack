@@ -1,0 +1,132 @@
+/* =====================================================
+   MENU PRINCIPAL - 21 BLACKJACK
+   Tamano de diseno: 960 x 505
+   La imagen de fondo (cartas, fichas, adornos) esta en img/fondo-menu.png
+   ===================================================== */
+
+/* ---------- Fondo ---------- */
+.menu-root {
+    -fx-background-color: #123a28;
+    -fx-background-image: url("img/fondo-menu.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left bottom;
+    -fx-background-size: cover;
+}
+
+/* ---------- Titulo dorado con relieve ---------- */
+.menu-titulo {
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-size: 66px;
+    -fx-font-weight: bold;
+    -fx-fill: linear-gradient(to bottom, #fde7a0 0%, #ecc57a 38%, #d19a42 70%, #9a6a22 100%);
+    -fx-stroke: #8a5f1f;
+    -fx-stroke-width: 1.4;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.65), 7, 0.35, 0, 4);
+}
+
+/* ---------- Subtitulo ---------- */
+.menu-subtitulo {
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-size: 31px;
+    -fx-font-weight: bold;
+    -fx-fill: linear-gradient(to bottom, #fff0cf 0%, #f7d9a4 100%);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.60), 4, 0.3, 0, 2);
+}
+
+/* ---------- Halo oscuro detras del boton JUGAR ---------- */
+.menu-halo {
+    -fx-background-color: rgba(8, 28, 20, 0.55);
+    -fx-background-radius: 20;
+    -fx-border-color: rgba(30, 80, 56, 0.55);
+    -fx-border-radius: 20;
+    -fx-border-width: 1.5;
+    -fx-padding: 11;
+}
+
+/* ---------- Boton JUGAR: marco dorado + interior verde ---------- */
+.menu-boton-jugar {
+    -fx-background-color:
+        linear-gradient(to bottom, #f6dc9c 0%, #d9b066 45%, #a9792c 100%),
+        linear-gradient(to bottom, #12281c 0%, #12281c 100%),
+        linear-gradient(to bottom, #35694b 0%, #28523a 45%, #1b3d2b 100%);
+    -fx-background-insets: 0, 3.5, 5;
+    -fx-background-radius: 12, 9, 7;
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-size: 38px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #f1cf84;
+    -fx-padding: 0;
+    -fx-alignment: center;
+    -fx-pref-width: 250;
+    -fx-pref-height: 82;
+    -fx-min-width: 250;
+    -fx-min-height: 82;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.70), 9, 0.35, 0, 5);
+}
+.menu-boton-jugar:hover {
+    -fx-background-color:
+        linear-gradient(to bottom, #fff0b8 0%, #e6c27a 45%, #b98a38 100%),
+        linear-gradient(to bottom, #12281c 0%, #12281c 100%),
+        linear-gradient(to bottom, #3f7a58 0%, #30614a 45%, #214a35 100%);
+}
+.menu-boton-jugar:pressed {
+    -fx-translate-y: 2;
+}
+
+/* ---------- Boton secundario VER REGLAS (verde) ---------- */
+.menu-boton-reglas {
+    -fx-background-color:
+        linear-gradient(to bottom, #e3c27c 0%, #b48d41 100%),
+        linear-gradient(to bottom, #3c6a48 0%, #2a4f35 100%);
+    -fx-background-insets: 0, 2;
+    -fx-background-radius: 8, 6;
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #f4d890;
+    -fx-padding: 0;
+    -fx-alignment: center;
+    -fx-pref-width: 146;
+    -fx-pref-height: 40;
+    -fx-min-width: 146;
+    -fx-min-height: 40;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.55), 5, 0.3, 0, 2);
+}
+.menu-boton-reglas:hover {
+    -fx-background-color:
+        linear-gradient(to bottom, #f0d28e 0%, #c49c4c 100%),
+        linear-gradient(to bottom, #487a56 0%, #33603f 100%);
+}
+
+/* ---------- Boton secundario CERRAR JUEGO (oscuro) ---------- */
+.menu-boton-cerrar {
+    -fx-background-color:
+        linear-gradient(to bottom, #d1ad66 0%, #9c7633 100%),
+        linear-gradient(to bottom, #3a3a38 0%, #1f1f1e 100%);
+    -fx-background-insets: 0, 2;
+    -fx-background-radius: 8, 6;
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #eadcb8;
+    -fx-padding: 0;
+    -fx-alignment: center;
+    -fx-pref-width: 140;
+    -fx-pref-height: 40;
+    -fx-min-width: 140;
+    -fx-min-height: 40;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.55), 5, 0.3, 0, 2);
+}
+.menu-boton-cerrar:hover {
+    -fx-background-color:
+        linear-gradient(to bottom, #e0bc72 0%, #ad8640 100%),
+        linear-gradient(to bottom, #4a4a47 0%, #2b2b29 100%);
+}
+
+.menu-boton-reglas:pressed,
+.menu-boton-cerrar:pressed {
+    -fx-translate-y: 1;
+}
