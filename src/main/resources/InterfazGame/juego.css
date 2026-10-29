@@ -1,0 +1,289 @@
+/* =====================================================
+   MESA DE JUEGO - 21 BLACKJACK
+   Tamano de diseno: 960 x 555
+   Fondo en img/fondo-juego.png, cartas e iconos en img/
+   ===================================================== */
+
+/* ---------- Fondo y marco dorado ---------- */
+.juego-root {
+    -fx-background-color: #0f3a28;
+    -fx-background-image: url("img/fondo-juego.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+    -fx-background-size: cover;
+    -fx-border-color: #c9a24e;
+    -fx-border-width: 2;
+}
+
+/* ---------- Nombres y puntajes ---------- */
+.juego-nombre {
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-text-fill: linear-gradient(to bottom, #fbe6a3 0%, #e3bf70 55%, #b98a3c 100%);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.70), 5, 0.35, 0, 3);
+}
+
+.juego-puntaje {
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: linear-gradient(to bottom, #f6ebc6 0%, #e2cf98 100%);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.70), 4, 0.35, 0, 2);
+}
+
+/* ---------- Paneles con borde dorado ---------- */
+.juego-panel {
+    -fx-background-color: rgba(4, 22, 14, 0.62);
+    -fx-background-radius: 7;
+    -fx-border-color: #c2a95e;
+    -fx-border-radius: 7;
+    -fx-border-width: 1.5;
+}
+
+.juego-panel-titulo {
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #e7c878;
+}
+
+.juego-panel-texto {
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #f1e3b5;
+}
+
+.juego-apuesta-texto {
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #f1e3b5;
+}
+
+.juego-apuesta-monto {
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #e7b94d;
+}
+
+/* ---------- Cartas ---------- */
+.juego-carta {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.60), 9, 0.25, 0, 4);
+}
+
+.juego-slot-vacio {
+    -fx-background-color: rgba(6, 30, 19, 0.88);
+    -fx-background-radius: 9;
+    -fx-border-color: rgba(20, 60, 40, 0.9);
+    -fx-border-radius: 9;
+    -fx-border-width: 1;
+}
+
+/* ---------- Mensaje de turno con resplandor ---------- */
+.juego-turno {
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: linear-gradient(to bottom, #fff6d6 0%, #f3dc9c 100%);
+    -fx-background-color: linear-gradient(to bottom, #1d4a35 0%, #0f3322 100%);
+    -fx-background-radius: 9;
+    -fx-border-color: #e6cf86;
+    -fx-border-radius: 9;
+    -fx-border-width: 2;
+    -fx-alignment: center;
+    -fx-padding: 8 24 8 24;
+    -fx-pref-width: 900;
+    -fx-pref-height: 112;
+    -fx-min-height: 80;
+    -fx-max-height: 130;
+    -fx-min-width: 260;
+    -fx-effect: dropshadow(gaussian, rgba(240, 205, 110, 0.75), 22, 0.35, 0, 0);
+}
+
+/* ---------- Campo de apuesta ---------- */
+.juego-campo-apuesta {
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #8a8a8a;
+    -fx-background-color: #373737;
+    -fx-background-radius: 4;
+    -fx-border-color: transparent;
+    -fx-padding: 0 8 0 8;
+}
+.juego-campo-apuesta:disabled {
+    -fx-opacity: 1;
+}
+
+/* ---------- Boton INICIAR RONDA (gris si esta deshabilitado) ---------- */
+.juego-boton-iniciar {
+    -fx-background-color:
+            linear-gradient(to bottom, #f6dc9c 0%, #b38a38 100%),
+            linear-gradient(to bottom, #e9c670 0%, #c79a3d 100%);
+    -fx-background-insets: 0, 1.5;
+    -fx-background-radius: 5, 4;
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2b1d00;
+    -fx-padding: 0;
+    -fx-alignment: center;
+    -fx-cursor: hand;
+}
+.juego-boton-iniciar:hover {
+    -fx-background-color:
+            linear-gradient(to bottom, #fff0b8 0%, #c49a46 100%),
+            linear-gradient(to bottom, #f2d283 0%, #d4a84a 100%);
+}
+.juego-boton-iniciar:disabled {
+    -fx-opacity: 1;
+    -fx-cursor: default;
+    -fx-background-color:
+            linear-gradient(to bottom, #4e4e4e 0%, #3a3a3a 100%),
+            linear-gradient(to bottom, #454545 0%, #363636 100%);
+    -fx-text-fill: #6e6e6e;
+}
+
+/* ---------- Botones de accion: marco dorado grueso ---------- */
+.juego-boton-pedir {
+    -fx-background-color:
+            linear-gradient(to bottom, #f0d58c 0%, #c19a47 55%, #8e6a25 100%),
+            linear-gradient(to bottom, #0f2217 0%, #0f2217 100%),
+            linear-gradient(to bottom, #34714a 0%, #2b6040 40%, #183620 100%);
+    -fx-background-insets: 0, 3, 4.5;
+    -fx-background-radius: 9, 7, 6;
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: linear-gradient(to bottom, #fbe6a3 0%, #e3bf70 60%, #c8a050 100%);
+    -fx-padding: 0;
+    -fx-alignment: center;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.65), 8, 0.3, 0, 4);
+}
+.juego-boton-pedir:hover {
+    -fx-background-color:
+            linear-gradient(to bottom, #fbe6a3 0%, #d1a955 55%, #9e7a32 100%),
+            linear-gradient(to bottom, #0f2217 0%, #0f2217 100%),
+            linear-gradient(to bottom, #3e8057 0%, #326f4b 40%, #1f4228 100%);
+}
+
+.juego-boton-plantarse {
+    -fx-background-color:
+            linear-gradient(to bottom, #f0d58c 0%, #c19a47 55%, #8e6a25 100%),
+            linear-gradient(to bottom, #0b0b0b 0%, #0b0b0b 100%),
+            linear-gradient(to bottom, #3c3c3c 0%, #292929 45%, #151310 100%);
+    -fx-background-insets: 0, 3, 4.5;
+    -fx-background-radius: 9, 7, 6;
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: linear-gradient(to bottom, #fbe6a3 0%, #e3bf70 60%, #c8a050 100%);
+    -fx-padding: 0;
+    -fx-alignment: center;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.65), 8, 0.3, 0, 4);
+}
+.juego-boton-plantarse:hover {
+    -fx-background-color:
+            linear-gradient(to bottom, #fbe6a3 0%, #d1a955 55%, #9e7a32 100%),
+            linear-gradient(to bottom, #0b0b0b 0%, #0b0b0b 100%),
+            linear-gradient(to bottom, #4a4a4a 0%, #343434 45%, #1d1b18 100%);
+}
+
+.juego-boton-pedir:pressed,
+.juego-boton-plantarse:pressed {
+    -fx-translate-y: 2;
+}
+
+.juego-boton-pedir:disabled,
+.juego-boton-plantarse:disabled {
+    -fx-opacity: 0.5;
+}
+
+/* ---------- Botones pequenos ---------- */
+.juego-boton-reglas {
+    -fx-background-color:
+            linear-gradient(to bottom, #cdbf7a 0%, #a39447 100%),
+            linear-gradient(to bottom, #2c5638 0%, #223f2b 100%);
+    -fx-background-insets: 0, 1.2;
+    -fx-background-radius: 5, 4;
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #e6edcb;
+    -fx-padding: 0;
+    -fx-alignment: center;
+    -fx-cursor: hand;
+}
+.juego-boton-reglas:hover {
+    -fx-background-color:
+            linear-gradient(to bottom, #ddd08a 0%, #b3a456 100%),
+            linear-gradient(to bottom, #356846 0%, #2a4d35 100%);
+}
+
+.juego-boton-cerrar {
+    -fx-background-color:
+            linear-gradient(to bottom, #9a4248 0%, #6e2a2f 100%),
+            linear-gradient(to bottom, #2e2424 0%, #1e1e1e 100%);
+    -fx-background-insets: 0, 1.2;
+    -fx-background-radius: 5, 4;
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ecdcb2;
+    -fx-padding: 0;
+    -fx-alignment: center;
+    -fx-cursor: hand;
+}
+.juego-boton-cerrar:hover {
+    -fx-background-color:
+            linear-gradient(to bottom, #b04e55 0%, #84343a 100%),
+            linear-gradient(to bottom, #3b2d2d 0%, #272424 100%);
+}
+
+/* ---------- Mensaje de detalle bajo el turno ---------- */
+.juego-mensaje {
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #f1e3b5;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.85), 4, 0.4, 0, 1);
+}
+.juego-mensaje-error {
+    -fx-text-fill: #ff9a8f;
+}
+
+/* ---------- Colores del titulo segun resultado ---------- */
+.juego-turno-gana {
+    -fx-border-color: #8be28b;
+    -fx-effect: dropshadow(gaussian, rgba(120, 230, 120, 0.75), 22, 0.35, 0, 0);
+}
+.juego-turno-pierde {
+    -fx-border-color: #e07a70;
+    -fx-effect: dropshadow(gaussian, rgba(230, 100, 90, 0.70), 22, 0.35, 0, 0);
+}
+.juego-turno-empate {
+    -fx-border-color: #cfd6e6;
+    -fx-effect: dropshadow(gaussian, rgba(200, 210, 235, 0.65), 22, 0.35, 0, 0);
+}
+
+/* ---------- Carta de respaldo (si falta la imagen PNG de una carta) ---------- */
+.juego-carta-texto {
+    -fx-background-color: linear-gradient(to bottom, #fbf7ee, #efe7d6);
+    -fx-background-radius: 9;
+    -fx-border-color: #b9ab8a;
+    -fx-border-radius: 9;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.60), 9, 0.25, 0, 4);
+}
+.juego-carta-valor {
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-size: 40px;
+    -fx-font-weight: bold;
+}
+.juego-carta-palo {
+    -fx-font-size: 44px;
+}

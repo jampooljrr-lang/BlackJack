@@ -117,7 +117,7 @@ public class BlackJackGame {
         return tieneAs && tieneDiez;
     }
 
-    boolean tieneVeinteYMedio(Mano mano) {
+    public boolean tieneVeinteYMedio(Mano mano) {
         if (mano.getCantidadCartas() != 2) {
             return false;
         }
@@ -266,6 +266,57 @@ public class BlackJackGame {
         apuesta = 0;
     }
 
+    // ===== Metodos publicos para la vista / controlador (MVC) =====
 
+    public int getApuesta() {
+        return apuesta;
+    }
+
+    public boolean isTurnoComputador() {
+        return turnoComputador;
+    }
+
+    public Mano getManoJugador() {
+        return manoJugador;
+    }
+
+    public Mano getManoComputador() {
+        return manoComputador;
+    }
+
+    /** El jugador puede seguir jugando si le alcanza para la apuesta minima (10). */
+    public boolean haySaldoSuficiente() {
+        return saldo >= 10;
+    }
+
+    public boolean esBlackJack(Mano mano) {
+        return tieneBlackJackInicial(mano);
+    }
+
+    /** Valida el texto escrito por el usuario. Devuelve null si es valido o el motivo del rechazo. */
+    public String validarApuesta(String texto) {
+        if (rondaActiva) {
+            return "No se puede cambiar la apuesta durante la ronda.";
+        }
+        if (texto == null || texto.trim().isEmpty()) {
+            return "Escribe tu apuesta.";
+        }
+        int cantidad;
+        try {
+            cantidad = Integer.parseInt(texto.trim());
+        } catch (NumberFormatException e) {
+            return "La apuesta debe ser un numero entero.";
+        }
+        if (cantidad < 10) {
+            return "La apuesta minima es de 10 fichas.";
+        }
+        if (cantidad % 10 != 0) {
+            return "La apuesta debe ser multiplo de 10.";
+        }
+        if (cantidad > saldo) {
+            return "Saldo insuficiente: solo tienes " + saldo + " fichas.";
+        }
+        return null;
+    }
 
 }

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane minHeight="520.0" minWidth="900.0" prefHeight="555.0" prefWidth="960.0" styleClass="juego-root" stylesheets="@juego.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.blackjack.controller.GameController">
+   <children>
+
+      <!-- Computador: nombre y puntaje -->
+      <VBox spacing="-2.0" AnchorPane.leftAnchor="27.0" AnchorPane.topAnchor="14.0">
+         <children>
+            <Label minWidth="-Infinity" styleClass="juego-nombre" text="COMPUTADOR" />
+            <Label fx:id="lblPuntajeComputador" minWidth="-Infinity" styleClass="juego-puntaje" text="(PUNTAJE: ??)" />
+         </children>
+      </VBox>
+
+      <!-- Banco del jugador -->
+      <VBox alignment="CENTER" prefHeight="83.0" prefWidth="221.0" spacing="6.0" styleClass="juego-panel" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0">
+         <children>
+            <Label minWidth="-Infinity" styleClass="juego-panel-titulo" text="BANCO DEL JUGADOR" />
+            <HBox alignment="CENTER" spacing="8.0">
+               <children>
+                  <Label fx:id="lblSaldo" minWidth="-Infinity" styleClass="juego-panel-texto" text="SALDO: 1.000 FICHAS" />
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/fichas.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+
+      <!-- Cartas del computador (contenido de muestra: GameController lo reemplaza al ejecutar) -->
+      <HBox fx:id="hboxCartasComputador" alignment="CENTER" minHeight="155.0" spacing="13.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="26.0">
+         <children>
+            <ImageView fitHeight="155.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true" styleClass="juego-carta">
+               <image>
+                  <Image url="@img/K_treboles.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="155.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true" styleClass="juego-carta">
+               <image>
+                  <Image url="@img/dorso.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+
+      <!-- Titulo de turno, mensajes de validacion, jugadas especiales y resultado -->
+      <VBox alignment="TOP_CENTER" spacing="6.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="200.0">
+         <children>
+            <Label fx:id="lblTurno" maxWidth="900.0" prefWidth="900.0" styleClass="juego-turno" text="¡TU TURNO!" textAlignment="CENTER" wrapText="true" />
+         </children>
+      </VBox>
+
+      <!-- Jugador: nombre y puntaje -->
+      <VBox spacing="-2.0" AnchorPane.leftAnchor="27.0" AnchorPane.topAnchor="316.0">
+         <children>
+            <Label minWidth="-Infinity" styleClass="juego-nombre" text="JUGADOR" />
+            <Label fx:id="lblPuntajeJugador" minWidth="-Infinity" styleClass="juego-puntaje" text="(PUNTAJE: 15)" />
+         </children>
+      </VBox>
+
+      <!-- Cartas del jugador (contenido de muestra: GameController lo reemplaza al ejecutar) -->
+      <HBox fx:id="hboxCartasJugador" alignment="CENTER" minHeight="155.0" spacing="13.0" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <ImageView fitHeight="155.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true" styleClass="juego-carta">
+               <image>
+                  <Image url="@img/J_corazones.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="155.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true" styleClass="juego-carta">
+               <image>
+                  <Image url="@img/5_picas.png" />
+               </image>
+            </ImageView>
+            <StackPane maxHeight="155.0" maxWidth="114.0" minHeight="155.0" minWidth="114.0" prefHeight="155.0" prefWidth="114.0" styleClass="juego-slot-vacio" />
+         </children>
+      </HBox>
+
+      <!-- Apuesta -->
+      <VBox prefHeight="139.0" prefWidth="235.0" spacing="9.0" styleClass="juego-panel" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="8.0">
+         <padding>
+            <Insets bottom="14.0" left="14.0" right="14.0" top="14.0" />
+         </padding>
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="5.0">
+               <children>
+                  <Label minWidth="-Infinity" styleClass="juego-apuesta-texto" text="APUESTA ACTUAL:" />
+                  <Label fx:id="lblApuestaActual" minWidth="-Infinity" styleClass="juego-apuesta-monto" text="50 FICHAS" />
+               </children>
+            </HBox>
+            <TextField fx:id="txtApuesta" disable="true" onAction="#onIniciarRonda" prefHeight="29.0" promptText="Múltiplo de 10" styleClass="juego-campo-apuesta" text="50" />
+            <Button fx:id="btnIniciarRonda" disable="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onIniciarRonda" prefHeight="36.0" styleClass="juego-boton-iniciar" text="INICIAR RONDA" />
+         </children>
+      </VBox>
+
+      <!-- Acciones -->
+      <VBox alignment="TOP_CENTER" prefHeight="211.0" prefWidth="235.0" spacing="14.0" styleClass="juego-panel" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="8.0">
+         <padding>
+            <Insets bottom="12.0" left="19.0" right="19.0" top="21.0" />
+         </padding>
+         <children>
+            <Button fx:id="btnPedirCarta" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onPedirCarta" prefHeight="60.0" styleClass="juego-boton-pedir" text="PEDIR CARTA" />
+            <Button fx:id="btnPlantarse" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onPlantarse" prefHeight="60.0" styleClass="juego-boton-plantarse" text="PLANTARSE" />
+            <HBox alignment="CENTER" spacing="10.0">
+               <VBox.margin>
+                  <Insets top="7.0" />
+               </VBox.margin>
+               <children>
+                  <Button fx:id="btnVerReglas" mnemonicParsing="false" onAction="#onVerReglas" prefHeight="24.0" prefWidth="93.0" styleClass="juego-boton-reglas" text="VER REGLAS" />
+                  <Button fx:id="btnCerrarJuego" mnemonicParsing="false" onAction="#onCerrarJuego" prefHeight="24.0" prefWidth="93.0" styleClass="juego-boton-cerrar" text="CERRAR JUEGO" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
