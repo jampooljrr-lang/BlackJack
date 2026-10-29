@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<BorderPane minHeight="480.0" minWidth="900.0" prefHeight="505.0" prefWidth="960.0" styleClass="menu-root" stylesheets="@menu.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.blackjack.MenuController">
+<BorderPane minHeight="480.0" minWidth="900.0" prefHeight="505.0" prefWidth="960.0" styleClass="menu-root" stylesheets="@menu.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.blackjack.controller.MenuController">
 
 
    <!-- Titulo, subtitulo y boton JUGAR -->

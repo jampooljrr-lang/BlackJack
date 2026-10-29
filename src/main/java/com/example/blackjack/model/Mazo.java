@@ -1,6 +1,7 @@
 
-package com.example.blackjack;
+package com.example.blackjack.model;
 /*herramienta para barajar*/
+
 import java.util.Random;
 
 public class Mazo {

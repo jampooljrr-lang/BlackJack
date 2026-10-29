@@ -1,5 +1,5 @@
 
-package com.example.blackjack;
+package com.example.blackjack.controller;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;

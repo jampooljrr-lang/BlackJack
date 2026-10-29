@@ -1,4 +1,5 @@
-package com.example.blackjack;
+package com.example.blackjack.model;
+
 import java.util.LinkedList;
 
 public class Mano {

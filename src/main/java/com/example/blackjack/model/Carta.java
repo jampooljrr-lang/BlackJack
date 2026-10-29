@@ -1,4 +1,4 @@
-package com.example.blackjack;
+package com.example.blackjack.model;
 
 public class Carta {private String valor;
     private String palo;
