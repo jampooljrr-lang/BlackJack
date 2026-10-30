@@ -221,8 +221,6 @@ public class BlackJackGame {
 
 
 
-
-    //va un private antes de void se cambio por pruebaa NO OLVIDAR
     void rondaResultado() {
         // Evita pagar dos veces por la misma ronda.
         if (!rondaActiva) {

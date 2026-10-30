@@ -1,5 +1,6 @@
 package com.example.blackjack;
 
+import com.example.blackjack.controller.Dialogos;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,6 +15,12 @@ public class BlackJackApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Juego BlackJack!");
         stage.setScene(scene);
+        // La X de la ventana tambien pide confirmacion; si se cancela, el juego sigue igual.
+        stage.setOnCloseRequest(evento -> {
+            if (!Dialogos.confirmarCierre()) {
+                evento.consume();
+            }
+        });
         stage.show();
     }
 }

@@ -54,7 +54,7 @@ package "com.example.blackjack.controller" {
   class Dialogos <<utility>>
 }
 
-package "com.example.blackjack.view" {
+package "Vista - src/main/resources" {
   class MenuView <<FXML>>
   class GameView <<FXML>>
   class MenuCSS <<CSS>>
