@@ -14,7 +14,6 @@ El jugador comienza con 1.000 fichas ficticias, realiza apuestas, pide cartas o 
 - **Código estudiantil:** 202537119
 - **Correo:** joseth.rodriguez@correounivalle.edu.co
 - **Repositorio:** https://github.com/jampooljrr-lang/BlackJack.git
-- **Versión entregada:** 
 - **Usuarios de GitHub:** jampooljrr-lang
 
 ## Tecnologías y requisitos
