@@ -1,9 +1,4 @@
-# UML final - 21 Black Jack
-
-Este diagrama representa la estructura final implementada del proyecto.
-
-El archivo editable está en [`UML_final.puml`](./UML_final.puml). Puede abrirse con PlantUML, IntelliJ IDEA con un complemento de PlantUML o cualquier visor compatible.
-
+# UML final 
 ```mermaid
 classDiagram
     class Carta {

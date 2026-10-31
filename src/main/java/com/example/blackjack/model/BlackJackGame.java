@@ -219,8 +219,6 @@ public class BlackJackGame {
         }
     }
 
-
-
     void rondaResultado() {
         // Evita pagar dos veces por la misma ronda.
         if (!rondaActiva) {
